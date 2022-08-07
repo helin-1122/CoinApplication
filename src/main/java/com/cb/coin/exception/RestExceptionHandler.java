@@ -12,16 +12,25 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return new ResponseEntity<>(new ApplicationException(ErrorCode.INTERNAL_ERROR, "internal server error"), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ApiError(ErrorCode.INTERNAL_ERROR.getCode(), "internal server error"), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    @ExceptionHandler(ApplicationException.class)
+    protected ResponseEntity<Object> handleApplicationException(ApplicationException ex) {
+        return new ResponseEntity<>(new ApiError(ErrorCode.INTERNAL_ERROR.getCode(), "internal server error"), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(TokenNotFoundException.class)
     protected ResponseEntity<Object> handleTokenNotFound(TokenNotFoundException ex) {
-        return new ResponseEntity<>(new ApplicationException(ErrorCode.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new ApiError(ErrorCode.NOT_FOUND.getCode(), ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CoinAlreadyExistException.class)
+    protected ResponseEntity<Object> handleCoinAlreadyExist(CoinAlreadyExistException ex) {
+        return new ResponseEntity<>(new ApiError(ErrorCode.CONFLICT.getCode(), "Coin already exist."), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(CoindeskIntegrationException.class)
     protected ResponseEntity<Object> handleIntegrationException(CoindeskIntegrationException ex) {
-        return new ResponseEntity<>(new ApplicationException(ErrorCode.INTERNAL_ERROR, ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ApiError(ErrorCode.INTERNAL_ERROR.getCode(), ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

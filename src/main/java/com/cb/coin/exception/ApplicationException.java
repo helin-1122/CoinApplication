@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
-public class ApplicationException {
-    private ErrorCode code;
-    private String message;
+public class ApplicationException extends RuntimeException{
+    public ApplicationException() {
+    }
+
+    public ApplicationException(final String message) {
+        super(message);
+    }
 }
