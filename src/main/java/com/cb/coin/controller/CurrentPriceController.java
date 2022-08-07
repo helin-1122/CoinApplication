@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Provides current price information from conindesk
+ */
 @RestController()
 @RequestMapping("/currentPrice")
 public class CurrentPriceController {

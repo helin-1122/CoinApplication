@@ -19,4 +19,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleTokenNotFound(TokenNotFoundException ex) {
         return new ResponseEntity<>(new ApplicationException(ErrorCode.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(CoindeskIntegrationException.class)
+    protected ResponseEntity<Object> handleIntegrationException(CoindeskIntegrationException ex) {
+        return new ResponseEntity<>(new ApplicationException(ErrorCode.INTERNAL_ERROR, ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Provides operations on Coin
+ */
 @RestController
 @RequestMapping("coins")
 public class CoinController {

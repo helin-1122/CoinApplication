@@ -78,7 +78,7 @@ public class CoinControllerTest {
 
         // verify coin is not found after delete
         client.get()
-                .uri("/coin/USD")
+                .uri("/coins/USD")
                 .exchange()
                 .expectStatus().isNotFound()
                 .expectBody()

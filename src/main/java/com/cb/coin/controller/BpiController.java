@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Provides simplified BPI information
+ */
 @RestController()
 @RequestMapping("/bpis")
 public class BpiController {

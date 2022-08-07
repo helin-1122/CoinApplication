@@ -10,15 +10,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class InitData {
-    private static final Logger log = LoggerFactory.getLogger(InitData.class);
+    private static final Logger logger = LoggerFactory.getLogger(InitData.class);
 
     @Bean
     CommandLineRunner initDatabase(CoinRepository repository) {
-
         return args -> {
-            log.info("Data init: " + repository.save(new Coin("USD", "美金")));
-            log.info("Data init: " + repository.save(new Coin("GBP", "英鎊")));
-            log.info("Data init: " + repository.save(new Coin("EUR", "歐元")));
+            logger.info("Data init: " + repository.save(new Coin("USD", "美金")));
+            logger.info("Data init: " + repository.save(new Coin("GBP", "英鎊")));
+            logger.info("Data init: " + repository.save(new Coin("EUR", "歐元")));
         };
     }
 }
